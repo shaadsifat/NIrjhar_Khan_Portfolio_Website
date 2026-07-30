@@ -1,0 +1,23 @@
+# Claude Code
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Env / secrets
+.env
+.env.local
+
+# Dependencies (in case PHPMailer/composer or a build tool gets added later)
+node_modules/
+vendor/
+
+# Logs
+*.log
