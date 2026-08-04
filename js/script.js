@@ -7,6 +7,46 @@
   var yearEl = document.getElementById('year');
   if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
 
+  /* light / dark theme toggle */
+  var themeToggle = document.getElementById('themeToggle');
+  if(themeToggle){
+    var root = document.documentElement;
+    function currentTheme(){
+      var stored = root.getAttribute('data-theme');
+      if(stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function syncToggle(theme){
+      themeToggle.setAttribute('aria-checked', theme === 'dark' ? 'true' : 'false');
+      themeToggle.setAttribute(
+        'aria-label',
+        theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+      );
+    }
+    syncToggle(currentTheme());
+    themeToggle.addEventListener('click', function(){
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch(e) {}
+      syncToggle(next);
+    });
+  }
+
+  /* collapsible service cards (mobile only) */
+  var serviceMobileQuery = window.matchMedia('(max-width: 900px)');
+  document.querySelectorAll('.service-card').forEach(function(card){
+    var head = card.querySelector('.service-card-head button');
+    if(!head) return;
+    if(serviceMobileQuery.matches){
+      head.setAttribute('aria-expanded', 'false');
+    }
+    head.addEventListener('click', function(){
+      if(!serviceMobileQuery.matches) return;
+      var isOpen = card.classList.toggle('is-open');
+      head.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
   /* mobile hamburger nav */
   var navToggle = document.getElementById('navToggle');
   var siteNav = document.getElementById('siteNav');

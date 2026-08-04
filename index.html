@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          if (stored === "light" || stored === "dark") {
+            document.documentElement.setAttribute("data-theme", stored);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <title>Nirjhar Khan — Graphic Designer &amp; Art Director</title>
     <meta
       name="description"
@@ -263,6 +273,17 @@
           <circle cx="21" cy="12" r="1.4" />
           <circle cx="21" cy="18" r="1.4" />
         </g>
+        <g id="svc-content">
+          <rect x="4" y="6" width="24" height="20" rx="2" />
+          <polygon points="13,12 20,16 13,20" />
+        </g>
+        <g id="svc-direction">
+          <path d="M5 10 V5 H10" />
+          <path d="M27 10 V5 H22" />
+          <path d="M5 22 V27 H10" />
+          <path d="M27 22 V27 H22" />
+          <circle cx="16" cy="16" r="4" />
+        </g>
 
         <g id="tool-pen">
           <polygon points="12,3 18,9 13,20 10,20 6,9" />
@@ -289,6 +310,19 @@
         <g id="tool-spark">
           <polygon points="12,2 14,10 22,12 14,14 12,22 10,14 2,12 10,10" />
         </g>
+
+        <g id="icon-sun">
+          <circle cx="12" cy="12" r="4" />
+          <path
+            d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"
+          />
+        </g>
+        <g id="icon-moon">
+          <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />
+        </g>
+        <g id="icon-chevron">
+          <path d="M6 9l6 6 6-6" />
+        </g>
       </defs>
     </svg>
 
@@ -313,6 +347,24 @@
           <a href="#work">WORK</a>
           <a href="#education">EDUCATION</a>
           <a href="#contact" class="nav-cta">CONTACT</a>
+          <div class="theme-toggle-wrap">
+            <span class="theme-toggle-label">Theme</span>
+            <button
+              type="button"
+              class="theme-toggle"
+              id="themeToggle"
+              role="switch"
+              aria-checked="true"
+              aria-label="Switch between light and dark theme"
+            >
+              <svg class="theme-toggle-bgicon theme-toggle-bgicon--moon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-moon" /></svg>
+              <svg class="theme-toggle-bgicon theme-toggle-bgicon--sun" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-sun" /></svg>
+              <span class="theme-toggle-thumb" aria-hidden="true">
+                <svg class="theme-toggle-thumb-icon theme-toggle-thumb-icon--moon" viewBox="0 0 24 24"><use href="#icon-moon" /></svg>
+                <svg class="theme-toggle-thumb-icon theme-toggle-thumb-icon--sun" viewBox="0 0 24 24"><use href="#icon-sun" /></svg>
+              </span>
+            </button>
+          </div>
         </nav>
       </div>
     </header>
@@ -394,10 +446,12 @@
             </h1>
 
             <p class="hero-lead hero-anim d3">
-              Graphic designer &amp; art director working across print and
-              pixel. I design bold visual identities, packaging, editorial
-              layouts, UI, and print work for brands that want to be remembered,
-              not just recognized.
+              With over 12 years of experience in the graphic design industry,
+              I have developed a strong understanding of visual communication,
+              branding, and creative problem-solving. This project involved a
+              complete brand transformation, requiring careful attention to
+              detail and a thoughtful balance between preserving the brand's
+              original identity and giving it a fresh, modern appeal.
             </p>
 
             <div class="hero-ctas hero-anim d3">
@@ -407,17 +461,17 @@
 
             <div class="stat-row hero-anim d3">
               <div class="stat-item">
-                <span class="stat-num">8+</span
+                <span class="stat-num">12+</span
                 ><span class="stat-label">Years<br />Experience</span>
               </div>
               <span class="stat-divider" aria-hidden="true"></span>
               <div class="stat-item">
-                <span class="stat-num">40+</span
+                <span class="stat-num">85+</span
                 ><span class="stat-label">Projects<br />Delivered</span>
               </div>
               <span class="stat-divider" aria-hidden="true"></span>
               <div class="stat-item">
-                <span class="stat-num">20+</span
+                <span class="stat-num">35+</span
                 ><span class="stat-label">Happy<br />Clients</span>
               </div>
             </div>
@@ -470,18 +524,22 @@
       <div class="marquee-band">
         <div class="marquee-track" aria-hidden="true">
           <span
-            ><i>✦</i>BRAND IDENTITY<i>✦</i>EDITORIAL
-            DESIGN<i>✦</i>PACKAGING<i>✦</i>ART DIRECTION<i>✦</i>TYPE
-            DESIGN<i>✦</i>POSTER ART<i>✦</i>BRAND IDENTITY<i>✦</i>EDITORIAL
-            DESIGN<i>✦</i>PACKAGING<i>✦</i>ART DIRECTION<i>✦</i>TYPE
-            DESIGN<i>✦</i>POSTER ART</span
+            ><i>✦</i>BRAND IDENTITY<i>✦</i>LOGO DESIGN<i>✦</i>SOCIAL MEDIA
+            DESIGN<i>✦</i>PACKAGING DESIGN<i>✦</i>EDITORIAL DESIGN<i>✦</i>PRINT
+            DESIGN<i>✦</i>POSTER DESIGN<i>✦</i>ADVERTISEMENT
+            DESIGN<i>✦</i>ART DIRECTION<i>✦</i>TYPOGRAPHY<i>✦</i>UI/UX
+            DESIGN<i>✦</i>MOTION GRAPHICS<i>✦</i>ILLUSTRATION<i>✦</i>PRODUCT
+            DESIGN<i>✦</i>VISUAL COMMUNICATION<i>✦</i>CREATIVE
+            DIRECTION</span
           >
           <span
-            ><i>✦</i>BRAND IDENTITY<i>✦</i>EDITORIAL
-            DESIGN<i>✦</i>PACKAGING<i>✦</i>ART DIRECTION<i>✦</i>TYPE
-            DESIGN<i>✦</i>POSTER ART<i>✦</i>BRAND IDENTITY<i>✦</i>EDITORIAL
-            DESIGN<i>✦</i>PACKAGING<i>✦</i>ART DIRECTION<i>✦</i>TYPE
-            DESIGN<i>✦</i>POSTER ART</span
+            ><i>✦</i>BRAND IDENTITY<i>✦</i>LOGO DESIGN<i>✦</i>SOCIAL MEDIA
+            DESIGN<i>✦</i>PACKAGING DESIGN<i>✦</i>EDITORIAL DESIGN<i>✦</i>PRINT
+            DESIGN<i>✦</i>POSTER DESIGN<i>✦</i>ADVERTISEMENT
+            DESIGN<i>✦</i>ART DIRECTION<i>✦</i>TYPOGRAPHY<i>✦</i>UI/UX
+            DESIGN<i>✦</i>MOTION GRAPHICS<i>✦</i>ILLUSTRATION<i>✦</i>PRODUCT
+            DESIGN<i>✦</i>VISUAL COMMUNICATION<i>✦</i>CREATIVE
+            DIRECTION</span
           >
         </div>
       </div>
@@ -542,47 +600,52 @@
                   <span class="dot dot--cobalt"></span>About Me
                 </p>
                 <h2 id="about-heading" class="reveal">
-                  Design that survives being handled, not just admired on a
-                  screen.
+                  Turning visual ideas into tangible experiences.
                 </h2>
                 <span class="accent-cross" aria-hidden="true"></span>
               </div>
               <p class="reveal">
-                I'm a graphic designer and art director working across brand
-                identity, editorial layout and print. I like a brief with real
-                constraints — a grid that has to hold, a colour that has to
-                print true — and I chase concepts that still feel sharp on the
-                tenth look, not just the first.
+                I'm a graphic designer and art director specialising in brand
+                identity, editorial design, and print. I'm drawn to briefs
+                with genuine constraints — grids that need to perform,
+                colours that must reproduce accurately, and visual systems
+                that have to remain consistent across every application. My
+                goal is to create ideas that feel considered at first glance
+                and continue to reveal their strength over time.
               </p>
               <p class="reveal">
-                Every project starts on paper before it ever touches a screen.
-                That habit shows up in the work: strong type, deliberate grids,
-                and a willingness to break the rules once I know them well
-                enough to break on purpose.
+                Every project begins with research, sketches, and ideas on
+                paper before moving to the screen. That process shapes the
+                way I work: purposeful typography, disciplined grid systems,
+                thoughtful hierarchy, and a clear understanding of when to
+                follow the rules and when breaking them can make the concept
+                stronger.
               </p>
               <p class="reveal">
-                Day to day that means logo and brand identity systems, packaging
-                and label design, editorial layout for print and digital, UI
-                design for websites and apps, and the occasional poster run just
-                for the fun of it. If it needs a grid, a typeface, and a point
-                of view, it's probably something I'd enjoy designing.
+                My work spans logo design and complete brand identity
+                systems, packaging and label design, editorial layouts for
+                print and digital, UI design for websites and applications,
+                and occasional self-initiated poster projects. Whether
+                building a brand from the ground up or refining an existing
+                visual language, I approach every project with clarity,
+                curiosity, and a distinct point of view.
               </p>
               <dl class="spec-sheet reveal">
                 <div class="row">
                   <dt>DISCIPLINE</dt>
-                  <dd>Graphic Design &amp; Art Direction</dd>
+                  <dd>Graphic Design · Art Direction · Visual Storytelling</dd>
                 </div>
                 <div class="row">
-                  <dt>FOCUS</dt>
-                  <dd>Identity, Editorial, Print</dd>
+                  <dt>SPECIALISMS</dt>
+                  <dd>Brand Identity · Editorial · Print &amp; Packaging</dd>
                 </div>
                 <div class="row">
-                  <dt>TOOLKIT</dt>
-                  <dd>Illustrator, Photoshop, InDesign, Figma</dd>
+                  <dt>CREATIVE TOOLKIT</dt>
+                  <dd>Illustrator · Photoshop · InDesign · Figma</dd>
                 </div>
                 <div class="row">
-                  <dt>STATUS</dt>
-                  <dd>Open to select projects</dd>
+                  <dt>CURRENTLY</dt>
+                  <dd>Available for Selected Projects &amp; Collaborations</dd>
                 </div>
               </dl>
             </div>
@@ -630,15 +693,19 @@
         <div class="wrap">
           <div class="section-head section-head--yolk">
             <p class="eyebrow reveal">
-              <span class="dot dot--yolk"></span>Services
+              <span class="dot dot--yolk"></span>Capabilities
             </p>
-            <h2 id="services-heading" class="reveal">Where I can help.</h2>
+            <h2 id="services-heading" class="reveal">
+              How I turn ideas into visual impact.
+            </h2>
             <span class="accent-cross" aria-hidden="true"></span>
             <p class="section-lead reveal">
-              From a single logo to a full brand system, I work across eight
-              disciplines that all come back to the same thing: making a message
-              impossible to ignore. Here's where I can help, whether the
-              deliverable ends up on a screen, a shelf, or a wall.
+              From a single logo to a complete brand system, I work across
+              eight creative disciplines - all driven by one goal: turning
+              ideas into visual messages that are clear, distinctive, and
+              impossible to overlook. Whether the final piece lives on a
+              screen, a shelf, or a wall, I bring strategy, craft, and a
+              strong point of view to every project.
             </p>
           </div>
 
@@ -648,56 +715,176 @@
                 ><span class="cf cf-tl"></span><span class="cf cf-tr"></span
                 ><span class="cf cf-bl"></span><span class="cf cf-br"></span
               ></span>
-              <div class="service-icon">
-                <svg viewBox="0 0 32 32"><use href="#svc-identity" /></svg>
+              <h3 class="service-card-head">
+                <button type="button" aria-expanded="true">
+                  <span class="service-icon"
+                    ><svg viewBox="0 0 32 32"><use href="#svc-identity" /></svg
+                  ></span>
+                  <span class="service-card-title">Visual Identity</span>
+                  <svg class="service-card-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron" /></svg>
+                </button>
+              </h3>
+              <div class="service-card-desc">
+                <p>
+                  Building distinctive brand identities through logos, colour
+                  systems, typography, and visual guidelines that stay
+                  consistent across every touchpoint.
+                </p>
               </div>
-              <h3>Visual Identity</h3>
-              <p>
-                Designing logos, brand style guides, colour palettes, and
-                typography rules that hold together across every touchpoint.
-              </p>
             </article>
             <article class="service-card service-card--cobalt reveal">
               <span class="card-frame" aria-hidden="true"
                 ><span class="cf cf-tl"></span><span class="cf cf-tr"></span
                 ><span class="cf cf-bl"></span><span class="cf cf-br"></span
               ></span>
-              <div class="service-icon">
-                <svg viewBox="0 0 32 32"><use href="#svc-marketing" /></svg>
+              <h3 class="service-card-head">
+                <button type="button" aria-expanded="true">
+                  <span class="service-icon"
+                    ><svg viewBox="0 0 32 32"><use href="#svc-marketing" /></svg
+                  ></span>
+                  <span class="service-card-title">Marketing &amp; Advertising</span>
+                  <svg class="service-card-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron" /></svg>
+                </button>
+              </h3>
+              <div class="service-card-desc">
+                <p>
+                  Creating social media campaigns, digital advertisements,
+                  posters, billboards, and promotional visuals designed to
+                  capture attention and inspire action.
+                </p>
               </div>
-              <h3>Marketing &amp; Advertising</h3>
-              <p>
-                Creating social media graphics, digital ads, billboards, flyers,
-                and posters that stop the scroll and hold attention.
-              </p>
             </article>
             <article class="service-card service-card--yolk reveal">
               <span class="card-frame" aria-hidden="true"
                 ><span class="cf cf-tl"></span><span class="cf cf-tr"></span
                 ><span class="cf cf-bl"></span><span class="cf cf-br"></span
               ></span>
-              <div class="service-icon">
-                <svg viewBox="0 0 32 32"><use href="#svc-ui" /></svg>
+              <h3 class="service-card-head">
+                <button type="button" aria-expanded="true">
+                  <span class="service-icon"
+                    ><svg viewBox="0 0 32 32"><use href="#svc-ui" /></svg
+                  ></span>
+                  <span class="service-card-title">User Interface (UI)</span>
+                  <svg class="service-card-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron" /></svg>
+                </button>
+              </h3>
+              <div class="service-card-desc">
+                <p>
+                  Designing clear, intuitive interfaces for websites, mobile
+                  apps, dashboards, and digital platforms that feel as good to
+                  use as they look.
+                </p>
               </div>
-              <h3>User Interface (UI)</h3>
-              <p>
-                Crafting the visual layout of websites, mobile apps, dashboard
-                interfaces, and game menus people actually enjoy using.
-              </p>
             </article>
             <article class="service-card service-card--flame reveal">
               <span class="card-frame" aria-hidden="true"
                 ><span class="cf cf-tl"></span><span class="cf cf-tr"></span
                 ><span class="cf cf-bl"></span><span class="cf cf-br"></span
               ></span>
-              <div class="service-icon">
-                <svg viewBox="0 0 32 32"><use href="#svc-print" /></svg>
+              <h3 class="service-card-head">
+                <button type="button" aria-expanded="true">
+                  <span class="service-icon"
+                    ><svg viewBox="0 0 32 32"><use href="#svc-print" /></svg
+                  ></span>
+                  <span class="service-card-title">Publication &amp; Print</span>
+                  <svg class="service-card-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron" /></svg>
+                </button>
+              </h3>
+              <div class="service-card-desc">
+                <p>
+                  Crafting structured layouts for books, magazines, reports,
+                  brochures, catalogues, and editorial content that make every
+                  page engaging and easy to navigate.
+                </p>
               </div>
-              <h3>Publication &amp; Print</h3>
-              <p>
-                Designing layouts for books, newspapers, magazines, eBooks, and
-                annual reports built to be read, not just looked at.
-              </p>
+            </article>
+            <article class="service-card service-card--cobalt reveal">
+              <span class="card-frame" aria-hidden="true"
+                ><span class="cf cf-tl"></span><span class="cf cf-tr"></span
+                ><span class="cf cf-bl"></span><span class="cf cf-br"></span
+              ></span>
+              <h3 class="service-card-head">
+                <button type="button" aria-expanded="true">
+                  <span class="service-icon"
+                    ><svg viewBox="0 0 32 32"><use href="#svc-motion" /></svg
+                  ></span>
+                  <span class="service-card-title">Motion Graphics</span>
+                  <svg class="service-card-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron" /></svg>
+                </button>
+              </h3>
+              <div class="service-card-desc">
+                <p>
+                  Bringing static ideas to life through animated typography,
+                  brand motion, social media visuals, explainers, and dynamic
+                  visual storytelling.
+                </p>
+              </div>
+            </article>
+            <article class="service-card service-card--yolk reveal">
+              <span class="card-frame" aria-hidden="true"
+                ><span class="cf cf-tl"></span><span class="cf cf-tr"></span
+                ><span class="cf cf-bl"></span><span class="cf cf-br"></span
+              ></span>
+              <h3 class="service-card-head">
+                <button type="button" aria-expanded="true">
+                  <span class="service-icon"
+                    ><svg viewBox="0 0 32 32"><use href="#svc-content" /></svg
+                  ></span>
+                  <span class="service-card-title">Dynamic Contents</span>
+                  <svg class="service-card-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron" /></svg>
+                </button>
+              </h3>
+              <div class="service-card-desc">
+                <p>
+                  Transforming raw footage into polished, engaging stories
+                  through thoughtful pacing, transitions, sound, colour, and
+                  visual effects.
+                </p>
+              </div>
+            </article>
+            <article class="service-card service-card--flame reveal">
+              <span class="card-frame" aria-hidden="true"
+                ><span class="cf cf-tl"></span><span class="cf cf-tr"></span
+                ><span class="cf cf-bl"></span><span class="cf cf-br"></span
+              ></span>
+              <h3 class="service-card-head">
+                <button type="button" aria-expanded="true">
+                  <span class="service-icon"
+                    ><svg viewBox="0 0 32 32"><use href="#svc-packaging" /></svg
+                  ></span>
+                  <span class="service-card-title">Product Design</span>
+                  <svg class="service-card-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron" /></svg>
+                </button>
+              </h3>
+              <div class="service-card-desc">
+                <p>
+                  Creating visually compelling product experiences from
+                  packaging and labels to presentation graphics and digital
+                  product interfaces.
+                </p>
+              </div>
+            </article>
+            <article class="service-card service-card--cobalt reveal">
+              <span class="card-frame" aria-hidden="true"
+                ><span class="cf cf-tl"></span><span class="cf cf-tr"></span
+                ><span class="cf cf-bl"></span><span class="cf cf-br"></span
+              ></span>
+              <h3 class="service-card-head">
+                <button type="button" aria-expanded="true">
+                  <span class="service-icon"
+                    ><svg viewBox="0 0 32 32"><use href="#svc-direction" /></svg
+                  ></span>
+                  <span class="service-card-title">Art Direction</span>
+                  <svg class="service-card-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron" /></svg>
+                </button>
+              </h3>
+              <div class="service-card-desc">
+                <p>
+                  Shaping the overall creative vision of a project by aligning
+                  concept, typography, imagery, colour, and composition into
+                  one cohesive visual language.
+                </p>
+              </div>
             </article>
           </div>
         </div>
@@ -763,12 +950,13 @@
               <span class="dot dot--flame"></span>Selected Work
             </p>
             <h2 id="work-heading" class="reveal">
-              Six jobs, six problems<br />worth solving twice.
+              Different briefs, distinct solutions.<br />Work made to last.
             </h2>
             <span class="accent-cross" aria-hidden="true"></span>
             <p class="section-lead reveal">
-              A mix of brand identity, social content, and UI work — filter by
-              discipline below, or browse everything at once.
+              From identity systems to digital experiences, explore a
+              selection of projects where every creative decision begins with
+              purpose. Browse by discipline or discover them all.
             </p>
           </div>
 
