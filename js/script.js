@@ -150,6 +150,23 @@
     }
   }
 
+  /* about: portrait tilts toward the cursor, same treatment as the hero shot */
+  if(fineCursor && !reduceMotion){
+    var aboutEl = document.getElementById('about');
+    var aboutPhoto = document.getElementById('aboutPhoto');
+    if(aboutEl && aboutPhoto){
+      aboutEl.addEventListener('mousemove', function(e){
+        var r = aboutEl.getBoundingClientRect();
+        var px = (e.clientX - r.left)/r.width - 0.5;
+        var py = (e.clientY - r.top)/r.height - 0.5;
+        aboutPhoto.style.transform = 'perspective(900px) rotateX('+(-py*10)+'deg) rotateY('+(px*10)+'deg)';
+      });
+      aboutEl.addEventListener('mouseleave', function(){
+        aboutPhoto.style.transform = '';
+      });
+    }
+  }
+
   /* floating tool chips — free-roaming physics bodies. Each chip drifts on
      its own heading, bounces off its section's edges and off the main
      content column (so it never sits on top of the text), and gets a
