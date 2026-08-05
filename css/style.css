@@ -457,11 +457,6 @@ nav a.nav-cta.is-current{background:var(--ink);color:var(--paper);}
   position:relative;z-index:1;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:center;
   border:2px solid var(--ink);background:var(--signal);
 }
-.portrait-block .tag{
-  position:absolute;z-index:2;bottom:-14px;left:-14px;background:var(--paper);
-  border:1.5px solid var(--ink);padding:.4em .8em;font-family:var(--font-mono);
-  font-size:.68rem;letter-spacing:.06em;transform:rotate(-3deg);
-}
 
 .scrollcue{
   position:absolute;right:var(--pad);bottom:0;
@@ -534,21 +529,26 @@ section{position:relative;overflow:hidden;padding:100px 0;}
 .about-grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,6vw,4.5rem);align-items:center;}
 @media (min-width:840px){ .about-grid{grid-template-columns:.6fr 1.4fr;} }
 
-.about-photo{position:relative;aspect-ratio:1/1;max-width:320px;margin:0 auto;}
-.about-photo .ring{
-  position:absolute;inset:-16px;border:2px dashed var(--ink);border-radius:50%;opacity:.4;
-  animation:spin 34s linear infinite;
+.about-photo{position:relative;width:100%;}
+.about-photo::before{
+  content:"";position:absolute;z-index:0;inset:6% 10%;border-radius:50%;
+  background:var(--yolk);filter:blur(60px);opacity:.4;mix-blend-mode:var(--reg-blend);
+  animation:aboutGlow 6s ease-in-out infinite;
 }
-@keyframes spin{to{transform:rotate(360deg);}}
-@media (prefers-reduced-motion:reduce){ .about-photo .ring{animation:none;} }
+@keyframes aboutGlow{
+  0%,100%{transform:scale(1);opacity:.32;}
+  50%{transform:scale(1.12);opacity:.5;}
+}
 .about-photo img{
-  position:relative;z-index:1;width:100%;height:100%;object-fit:cover;
-  border:2px solid var(--ink);background:var(--signal);
+  position:relative;z-index:1;display:block;width:100%;height:auto;
+  animation:aboutFloat 6s ease-in-out infinite;
 }
-.about-photo .tag{
-  position:absolute;z-index:2;bottom:-14px;right:-14px;background:var(--paper);
-  border:1.5px solid var(--ink);padding:.4em .8em;font-family:var(--font-mono);
-  font-size:.68rem;letter-spacing:.06em;transform:rotate(3deg);
+@keyframes aboutFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+@media (prefers-reduced-motion:reduce){
+  .about-photo::before,.about-photo img{animation:none;}
 }
 
 .about-copy .section-head{margin-bottom:1.3rem;}
