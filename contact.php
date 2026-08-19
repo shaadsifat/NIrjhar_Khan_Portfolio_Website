@@ -10,7 +10,7 @@
 // ============================================================
 // CONFIG — replace these before going live
 // ============================================================
-$recipientEmail = "hello@nirjharkhan.com";   // TODO: the inbox that should receive messages
+$recipientEmail = "contact@nirjharkhan.com";   // TODO: the inbox that should receive messages
 $siteName       = "Nirjhar Khan Portfolio";  // TODO: shown in the email subject line
 
 // Optional — only needed if you switch from PHP's built-in mail() below to

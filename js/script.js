@@ -375,57 +375,137 @@
     });
   });
 
-  /* testimonial carousel */
+  /* testimonial carousel — infinite loop: the real cards are flanked by a
+     cloned copy on each side, so advancing past the last real page glides
+     onto a visual duplicate of page 1, then silently (no transition) snaps
+     back to the real page 1 the instant that glide finishes. Nothing ever
+     visibly scrolls backwards. */
   var track = document.getElementById('testimonialTrack');
   if(track){
-    var cards = Array.prototype.slice.call(track.children);
+    var realCards = Array.prototype.slice.call(track.children);
+    var realCount = realCards.length;
     var prevBtn = document.getElementById('tPrev');
     var nextBtn = document.getElementById('tNext');
     var dotsWrap = document.getElementById('tDots');
+    var wrap = document.querySelector('.testimonial-wrap');
+    var GAP = 24; // matches CSS gap
+    var TRANSITION_MS = 550; // matches .testimonial-track transition duration
+
+    var cloneBefore = realCards.map(function(c){
+      var clone = c.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      return clone;
+    });
+    var cloneAfter = realCards.map(function(c){
+      var clone = c.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      return clone;
+    });
+    track.innerHTML = '';
+    cloneBefore.forEach(function(c){ track.appendChild(c); });
+    realCards.forEach(function(c){ track.appendChild(c); });
+    cloneAfter.forEach(function(c){ track.appendChild(c); });
+
     var perView = window.matchMedia('(max-width: 700px)').matches ? 1 : 2;
-    var pageCount = Math.ceil(cards.length / perView);
+    var pageCount = Math.ceil(realCount / perView);
     var page = 0;
+    var snapTimer = null;
+    var autoTimer = null;
 
     function buildDots(){
       dotsWrap.innerHTML = '';
       for(var i=0;i<pageCount;i++){
         var b = document.createElement('button');
         b.type = 'button';
-        b.className = 'dot-btn' + (i===page ? ' is-active' : '');
+        b.className = 'dot-btn' + (i===0 ? ' is-active' : '');
         b.setAttribute('aria-label', 'Go to testimonial page ' + (i+1));
-        b.addEventListener('click', function(idx){ return function(){ goTo(idx); }; }(i));
+        b.addEventListener('click', function(idx){ return function(){ userJump(idx); }; }(i));
         dotsWrap.appendChild(b);
       }
       if(window.__bindHoverables){ window.__bindHoverables(); }
     }
 
-    function goTo(p){
-      page = (p + pageCount) % pageCount;
-      var cardWidth = cards[0].getBoundingClientRect().width;
-      var gap = 24; // matches CSS gap
-      var offset = page * perView * (cardWidth + gap);
-      track.style.transform = 'translateX(-' + offset + 'px)';
+    function updateDots(){
+      var active = ((page % pageCount) + pageCount) % pageCount;
       Array.prototype.forEach.call(dotsWrap.children, function(d,i){
-        d.classList.toggle('is-active', i===page);
+        d.classList.toggle('is-active', i===active);
       });
     }
 
-    prevBtn.addEventListener('click', function(){ goTo(page - 1); });
-    nextBtn.addEventListener('click', function(){ goTo(page + 1); });
+    function render(animate){
+      var cardWidth = realCards[0].getBoundingClientRect().width;
+      var step = cardWidth + GAP;
+      var baseOffset = realCount * step; // width of the leading clone set
+      var offset = baseOffset + page * perView * step;
+      track.style.transition = animate === false ? 'none' : '';
+      track.style.transform = 'translateX(-' + offset + 'px)';
+      if(animate === false){ track.getBoundingClientRect(); track.style.transition = ''; }
+    }
+
+    function settleIfNeeded(){
+      if(snapTimer){ clearTimeout(snapTimer); snapTimer = null; }
+      if(page >= pageCount || page < 0){
+        snapTimer = setTimeout(function(){
+          page = ((page % pageCount) + pageCount) % pageCount;
+          render(false);
+        }, TRANSITION_MS);
+      }
+    }
+
+    function next(){
+      page += 1;
+      render(true);
+      updateDots();
+      settleIfNeeded();
+    }
+    function prev(){
+      page -= 1;
+      render(true);
+      updateDots();
+      settleIfNeeded();
+    }
+    function userJump(target){
+      page = target;
+      render(true);
+      updateDots();
+      restartAutoplay();
+    }
+
+    function startAutoplay(){
+      if(reduceMotion) return;
+      stopAutoplay();
+      autoTimer = setInterval(next, 5000);
+    }
+    function stopAutoplay(){
+      if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+    }
+    function restartAutoplay(){ startAutoplay(); }
+
+    prevBtn.addEventListener('click', function(){ prev(); restartAutoplay(); });
+    nextBtn.addEventListener('click', function(){ next(); restartAutoplay(); });
+
+    if(wrap){
+      wrap.addEventListener('mouseenter', stopAutoplay);
+      wrap.addEventListener('mouseleave', startAutoplay);
+      wrap.addEventListener('focusin', stopAutoplay);
+      wrap.addEventListener('focusout', startAutoplay);
+    }
 
     window.addEventListener('resize', function(){
       var newPerView = window.matchMedia('(max-width: 700px)').matches ? 1 : 2;
       if(newPerView !== perView){
         perView = newPerView;
-        pageCount = Math.ceil(cards.length / perView);
+        pageCount = Math.ceil(realCount / perView);
         page = 0;
         buildDots();
       }
-      goTo(page);
+      render(false);
+      updateDots();
     });
 
     buildDots();
-    goTo(0);
+    render(false);
+    startAutoplay();
   }
 
   /* contact form — posts to contact.php (see that file for setup notes) */

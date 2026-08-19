@@ -21,3 +21,6 @@ vendor/
 
 # Logs
 *.log
+
+# Source content brief — not a web asset, not needed in the repo
+recomendatiions.docx
