@@ -369,7 +369,9 @@
       btn.classList.add('is-active');
       var filter = btn.dataset.filter;
       workCards.forEach(function(card){
-        var match = filter === 'all' || card.dataset.category === filter;
+        var match = filter === 'all'
+          ? card.dataset.hideAll !== 'true'
+          : card.dataset.category === filter;
         card.classList.toggle('is-hidden', !match);
       });
     });
