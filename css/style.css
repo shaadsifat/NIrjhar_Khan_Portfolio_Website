@@ -1186,11 +1186,8 @@ nav a.nav-cta.is-current {
 .social-badge svg {
   width: 1.15rem;
   height: 1.15rem;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  fill: currentColor;
+  stroke: none;
 }
 .social-badge:hover {
   background: var(--flame);
